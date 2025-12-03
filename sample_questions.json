@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is 2 + 2?",
+        "optionCorrect": "4",
+        "optionA": "3",
+        "optionB": "5",
+        "optionC": "6",
+        "explanation": "Basic arithmetic: 2 + 2 equals 4."
+    },
+    {
+        "question": "What is the capital of Japan?",
+        "optionCorrect": "Tokyo",
+        "optionA": "Osaka",
+        "optionB": "Kyoto",
+        "optionC": "Hiroshima",
+        "explanation": "Tokyo is the capital city of Japan."
+    },
+    {
+        "question": "How many continents are there?",
+        "optionCorrect": "7",
+        "optionA": "5",
+        "optionB": "6",
+        "optionC": "8",
+        "explanation": "There are 7 continents: Africa, Antarctica, Asia, Europe, North America, Australia, and South America."
+    }
+]
