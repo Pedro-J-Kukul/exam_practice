@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../models/multiple_choice_model.dart';
 
 class MultipleChoiceCard extends StatefulWidget {
-  // TODO: Convert Another list model to keep locked state across multiple questions
-  // TODO: Make the whole option row tappable
   final MultipleChoiceQuestion question;
   final void Function(bool isCorrect)?
   onAnswerSubmitted; // Callback for parent to track score
