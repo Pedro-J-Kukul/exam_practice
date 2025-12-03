@@ -474,7 +474,7 @@ The APK will be in `build/app/outputs/flutter-apk/app-release.apk`
 - Or use Firebase App Distribution for beta testing
 
 ## Future Enhancements
-- [ ] Uploading Questions
+- [✅] Uploading Questions
 - [ ] Timed practice sessions
 - [ ] Study statistics dashboard
 - [ ] Spaced repetition algorithm
