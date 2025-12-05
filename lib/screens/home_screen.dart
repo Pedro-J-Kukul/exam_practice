@@ -6,6 +6,7 @@ import '../providers/questions_provider.dart';
 import '../utils/app_constants.dart';
 import '../widgets/common/custom_button.dart';
 import '../widgets/common/loading_indicator.dart';
+import '../widgets/common/app_footer.dart';
 import 'questions/questions_list_screen.dart';
 import 'quiz/quiz_settings_screen.dart';
 
@@ -43,88 +44,99 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Exam Practice')),
-      body: _isLoading
-          ? const LoadingIndicator(message: 'Loading questions...')
-          : Consumer<QuestionsProvider>(
-              builder: (context, questionsProvider, child) {
-                final questionCount = questionsProvider.questionCount;
+      body: Column(
+        children: [
+          Expanded(
+            child: _isLoading
+                ? const LoadingIndicator(message: 'Loading questions...')
+                : Consumer<QuestionsProvider>(
+                    builder: (context, questionsProvider, child) {
+                      final questionCount = questionsProvider.questionCount;
 
-                return Center(
-                  child: SingleChildScrollView(
-                    padding: AppConstants.paddingAllL,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.school_outlined,
-                          size: AppConstants.iconXL * 3,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const SizedBox(height: AppConstants.spacingXL),
-                        Text(
-                          'Exam Practice',
-                          style: Theme.of(context).textTheme.displayMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: AppConstants.spacingS),
-                        Text(
-                          questionCount > 0
-                              ? '$questionCount question${questionCount != 1 ? 's' : ''} available'
-                              : 'No questions available',
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(
-                                color: Theme.of(
+                      return Center(
+                        child: SingleChildScrollView(
+                          padding: AppConstants.paddingAllL,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.school_outlined,
+                                size: AppConstants.iconXL * 3,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              const SizedBox(height: AppConstants.spacingXL),
+                              Text(
+                                'Exam Practice',
+                                style: Theme.of(
                                   context,
-                                ).textTheme.bodySmall?.color,
+                                ).textTheme.displayMedium,
+                                textAlign: TextAlign.center,
                               ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: AppConstants.spacingXXL),
-                        if (questionCount > 0) ...[
-                          CustomButton(
-                            text: 'Start Quiz',
-                            icon: Icons.play_arrow,
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => const QuizSettingsScreen(),
+                              const SizedBox(height: AppConstants.spacingS),
+                              Text(
+                                questionCount > 0
+                                    ? '$questionCount question${questionCount != 1 ? 's' : ''} available'
+                                    : 'No questions available',
+                                style: Theme.of(context).textTheme.bodyLarge
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.bodySmall?.color,
+                                    ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: AppConstants.spacingXXL),
+                              if (questionCount > 0) ...[
+                                CustomButton(
+                                  text: 'Start Quiz',
+                                  icon: Icons.play_arrow,
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            const QuizSettingsScreen(),
+                                      ),
+                                    );
+                                  },
+                                  fullWidth: true,
                                 ),
-                              );
-                            },
-                            fullWidth: true,
-                          ),
-                          const SizedBox(height: AppConstants.spacingM),
-                        ],
-                        CustomButton(
-                          text: 'View Questions',
-                          icon: Icons.list_alt,
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const QuestionsListScreen(),
+                                const SizedBox(height: AppConstants.spacingM),
+                              ],
+                              CustomButton(
+                                text: 'View Questions',
+                                icon: Icons.list_alt,
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          const QuestionsListScreen(),
+                                    ),
+                                  );
+                                },
+                                variant: questionCount > 0
+                                    ? CustomButtonVariant.outlined
+                                    : CustomButtonVariant.primary,
+                                fullWidth: true,
                               ),
-                            );
-                          },
-                          variant: questionCount > 0
-                              ? CustomButtonVariant.outlined
-                              : CustomButtonVariant.primary,
-                          fullWidth: true,
-                        ),
-                        if (questionCount == 0) ...[
-                          const SizedBox(height: AppConstants.spacingXXL),
-                          Text(
-                            'Add questions manually or import from a CSV/JSON file to get started.',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            textAlign: TextAlign.center,
+                              if (questionCount == 0) ...[
+                                const SizedBox(height: AppConstants.spacingXXL),
+                                Text(
+                                  'Add questions manually or import from a CSV/JSON file to get started.',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ],
                           ),
-                        ],
-                      ],
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+          ),
+          const AppFooter(),
+        ],
+      ),
     );
   }
 }
